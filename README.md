@@ -13,7 +13,8 @@ Desenvolvido em C++11 com foco em **modularidade, segurança de memória, tratam
 
 ## 📸 Interface (modo terminal)
 
-> ![Exemplo visual do sistema](./35d5a172-7c81-4f07-98f2-5c2dfff73226.png)
+
+> ![Exemplo visual do sistema](https://github.com/user-attachments/assets/77ea6dc1-c82d-4508-bf17-2b273407cdb3)
 
 ---
 
