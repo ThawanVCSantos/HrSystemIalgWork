@@ -6,6 +6,8 @@
 #include <cstring>
 #include <string>
 #include <limits>
+#include <map>
+#include <functional>
 
 #include "../../include/hr_system/model/Candidate.hpp"
 #include "../../include/hr_system/repository/CandidateRepository.hpp"
@@ -742,96 +744,61 @@ void Menu::selectOption() {
 }
 
 void Menu::applyOrderBy() {
-  if(this->orderByField == HrMenuFieldEnum::FULL_NAME) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getFullName()) < std::string(b.getFullName());
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getFullName()) > std::string(b.getFullName());
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::AGE) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getAge() < b.getAge();
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getAge() > b.getAge();
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::CPF) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getCpf()) < std::string(b.getCpf());
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getCpf()) > std::string(b.getCpf());
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::WORK_SECTOR) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getWorkSector()) < std::string(b.getWorkSector());
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getWorkSector()) > std::string(b.getWorkSector());
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::POSITION) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getPosition()) < std::string(b.getPosition());
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getPosition()) > std::string(b.getPosition());
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::CONTRACT_TYPE) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getContractType()) < std::string(b.getContractType());
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return std::string(a.getContractType()) > std::string(b.getContractType());
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::SALARY_EXPECTATION) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getSalaryExpectation() < b.getSalaryExpectation();
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getSalaryExpectation() > b.getSalaryExpectation();
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::IS_REFERRAL) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getIsReferral() < b.getIsReferral();
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getIsReferral() > b.getIsReferral();
-      });
-    }
-  } else if(this->orderByField == HrMenuFieldEnum::YEARS_OF_EXPERIENCE) {
-    if(this->orderByDirection == OrderDirectionEnum::ASC) {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getYearsOfExperience() < b.getYearsOfExperience();
-      });
-    } else {
-      candidatesView = candidatesView.sort([](Candidate a, Candidate b) {
-        return a.getYearsOfExperience() > b.getYearsOfExperience();
-      });
-    }
+  static const size_t BUF_SIZE = 1300;
+
+  typedef std::function<void(const Candidate&, char*, size_t)> StringExtractorCharArray;
+  typedef std::function<double(const Candidate&)> OtherExtractor;
+
+  static const std::map<HrMenuFieldEnum, StringExtractorCharArray> stringExtractors = {
+    {HrMenuFieldEnum::FULL_NAME, [](const Candidate& c, char* buf, size_t size) {
+      ArrayUtils::copyArrayElements(c.getFullName(), buf, size);
+      StringUtils::toLowerCase(buf);
+    }},
+    {HrMenuFieldEnum::CPF, [](const Candidate& c, char* buf, size_t size) {
+      ArrayUtils::copyArrayElements(c.getCpf(), buf, size);
+    }},
+    {HrMenuFieldEnum::WORK_SECTOR, [](const Candidate& c, char* buf, size_t size) {
+      ArrayUtils::copyArrayElements(c.getWorkSector(), buf, size);
+      StringUtils::toLowerCase(buf);
+    }},
+    {HrMenuFieldEnum::POSITION, [](const Candidate& c, char* buf, size_t size) {
+      ArrayUtils::copyArrayElements(c.getPosition(), buf, size);
+      StringUtils::toLowerCase(buf);
+    }},
+    {HrMenuFieldEnum::CONTRACT_TYPE, [](const Candidate& c, char* buf, size_t size) {
+      ArrayUtils::copyArrayElements(c.getContractType(), buf, size);
+      StringUtils::toLowerCase(buf);
+    }}
+  };
+
+  static const std::map<HrMenuFieldEnum, OtherExtractor> otherExtractors = {
+    {HrMenuFieldEnum::AGE, [](const Candidate& c) { return static_cast<double>(c.getAge()); }},
+    {HrMenuFieldEnum::YEARS_OF_EXPERIENCE, [](const Candidate& c) { return static_cast<double>(c.getYearsOfExperience()); }},
+    {HrMenuFieldEnum::SALARY_EXPECTATION, [](const Candidate& c) { return c.getSalaryExpectation(); }},
+    {HrMenuFieldEnum::IS_REFERRAL, [](const Candidate& c) { return c.getIsReferral() ? 1.0 : 0.0; }}
+  };
+
+  auto field = this->orderByField;
+  auto dir = this->orderByDirection;
+
+  if (stringExtractors.count(field)) {
+    auto extractor = stringExtractors.at(field);
+    candidatesView = candidatesView.sort([=](const Candidate& a, const Candidate& b) {
+      char aBuf[BUF_SIZE];
+      char bBuf[BUF_SIZE];
+      extractor(a, aBuf, BUF_SIZE);
+      extractor(b, bBuf, BUF_SIZE);
+      return dir == OrderDirectionEnum::ASC ?
+        std::string(aBuf) < std::string(bBuf) :
+        std::string(aBuf) > std::string(bBuf);
+    });
+  } else if (otherExtractors.count(field)) {
+    auto extractor = otherExtractors.at(field);
+    candidatesView = candidatesView.sort([=](const Candidate& a, const Candidate& b) {
+      return (dir == OrderDirectionEnum::ASC) ?
+        (extractor(a) < extractor(b)) :
+        (extractor(a) > extractor(b));
+    });
   }
 }
 
