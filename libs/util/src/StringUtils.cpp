@@ -24,12 +24,13 @@ namespace util {
     int i = 0;
     while (cs[i] != '\0') {
       cs[i] = toLowerCase(cs[i]);
+      i++;
     }
   }
 
   char StringUtils::toUpperCase(char c) {
     if (c >= 'a' && c <= 'z') {
-        return c - 32;
+      return c - 32;
     }
     return c;
   }
@@ -38,6 +39,7 @@ namespace util {
     int i = 0;
     while (cs[i] != '\0') {
       cs[i] = toUpperCase(cs[i]);
+      i++;
     }
   }
 
