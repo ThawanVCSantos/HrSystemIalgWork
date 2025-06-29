@@ -148,14 +148,11 @@ namespace util {
     result.capacity = capacity;
     result.elements = new T[capacity];
 
-    for (int i = 0; i < length; ++i)
+    for (int i = 0; i < length; ++i) {
       result.elements[i] = elements[i];
-
-    if (length <= 32) {
-      ArrayUtils::insertionSort(result.elements, result.length, comp);
-    } else {
-      ArrayUtils::mergeSort(result.elements, result.length, comp);
     }
+
+    ArrayUtils::sort(result.elements, result.length, comp);
 
     return result;
   }
