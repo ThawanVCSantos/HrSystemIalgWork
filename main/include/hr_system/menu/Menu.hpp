@@ -56,7 +56,7 @@ namespace hr_system {
 
         void printOptions();
 
-        void printDivider(char c = '-', bool isBold = true, std::string color = "\033[33m", int size = 142, bool hasBreakLine = true);
+        void printDivider(char c = '-', bool isBold = true, std::string color = "\033[33m", int size = 143, bool hasBreakLine = true);
         void printHeaderSelectOption();
         void printHeaderSelectOptionOrderBy();
         void printOptionsDirectionOrderBy(HrMenuFieldEnum field);

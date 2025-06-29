@@ -62,7 +62,7 @@ void Menu::print() {
 void Menu::printHeader() {
   std::cout << BOLD << BLUE << std::string(59, '=')
     << " Recrutamento e Seleção "
-    << std::string(59, '=') << RESET << std::endl;
+    << std::string(60, '=') << RESET << std::endl;
 }
 
 void Menu::printListHeader() {
@@ -73,7 +73,7 @@ void Menu::printListHeader() {
     << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Setor", 18)
     << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Cargo", 18)
     << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Contrato", 13)
-    << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Salario", 10)
+    << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("P. Salarial", 11)
     << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Ind", 3)
     << BOLD << YELLOW << " | " << RESET << BOLD << StringUtils::centralize("Exp", 3)
     << BOLD << YELLOW << " |" << RESET << std::endl;
@@ -93,7 +93,7 @@ void Menu::printList() {
         << YELLOW << " | " << RESET << std::setw(18) << StringUtils::truncate(c.getWorkSector(), 18)
         << YELLOW << " | " << RESET << std::setw(18) << StringUtils::truncate(c.getPosition(), 18)
         << YELLOW << " | " << RESET << std::setw(13) << StringUtils::truncate(c.getContractType(), 13)
-        << YELLOW << " | " << RESET << std::setw(10) << std::fixed << std::setprecision(2) << c.getSalaryExpectation()
+        << YELLOW << " | " << RESET << std::setw(11) << std::fixed << std::setprecision(2) << c.getSalaryExpectation()
         << YELLOW << " | " << RESET << std::setw(3)  << (c.getIsReferral() ? "Sim" : "Nao")
         << YELLOW << " | " << RESET << std::setw(3)  << c.getYearsOfExperience()
         << YELLOW << " |" << RESET << std::endl;
@@ -106,7 +106,7 @@ void Menu::printList() {
 
 void Menu::printHeaderSelectOption() {
   std::cout << CYAN << BOLD << "+";
-  printDivider('-', true, CYAN, 59, false);
+  printDivider('-', true, CYAN, 60, false);
   std::cout << CYAN << BOLD << " Selecione uma Opção ";
   printDivider('-', true, CYAN, 60, false);
   std::cout << CYAN << BOLD << "+" << RESET << std::endl;
@@ -114,7 +114,7 @@ void Menu::printHeaderSelectOption() {
 
 void Menu::printHeaderSelectOptionOrderBy() {
   std::cout << CYAN << BOLD << "+";
-  printDivider('-', true, CYAN, 63, false);
+  printDivider('-', true, CYAN, 64, false);
   std::cout << CYAN << BOLD << " Ordenar por ";
   printDivider('-', true, CYAN, 64, false);
   std::cout << CYAN << BOLD << "+" << RESET << std::endl;
@@ -124,7 +124,7 @@ void Menu::printHeaderFindBy() {
   std::cout << CYAN << BOLD << "+";
   printDivider('-', true, CYAN, 64, false);
   std::cout << CYAN << BOLD << " Buscar por ";
-  printDivider('-', true, CYAN, 64, false);
+  printDivider('-', true, CYAN, 65, false);
   std::cout << CYAN << BOLD << "+" << RESET << std::endl;
 }
 
@@ -134,33 +134,33 @@ void Menu::printOptions() {
   std::cout << CYAN << "|" << RESET
     << " 👥 Candidatos:" << std::setw(4) << ""
     << "1. Adicionar" << std::setw(9) << ""
-    << "2. Remover" << std::setw(90) << ""
+    << "2. Remover" << std::setw(91) << ""
     << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
+  std::cout << CYAN << "|" << RESET << std::string(141, ' ') << CYAN << "|" << RESET << std::endl;
 
   std::cout << CYAN << "|" << RESET
     << " 📄 Arquivo:" << std::setw(7) << ""
     << "3. Importar CSV" << std::setw(6) << ""
-    << "4. Exportar CSV" << std::setw(85) << ""
+    << "4. Exportar CSV" << std::setw(86) << ""
     << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
+  std::cout << CYAN << "|" << RESET << std::string(141, ' ') << CYAN << "|" << RESET << std::endl;
 
   std::cout << CYAN << "|" << RESET
     << " 🔍 Visualização:  "
     << "5. Ordenar por:" << std::setw(6) << ""
     << "6. Buscar por:" << std::setw(7) << ""
     << "7. Visualizar Lista " << (mode == MenuListModeEnum::PAGINATED ? "Completa" : "Paginada") << std::setw(5) << ""
-    << (mode == MenuListModeEnum::PAGINATED ? "8. Definir items/página" : "") << std::setw(mode == MenuListModeEnum::PAGINATED ? 23 : 46) << ""
+    << (mode == MenuListModeEnum::PAGINATED ? "8. Definir items/página" : "") << std::setw(mode == MenuListModeEnum::PAGINATED ? 24 : 47) << ""
     << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
+  std::cout << CYAN << "|" << RESET << std::string(141, ' ') << CYAN << "|" << RESET << std::endl;
 
   if (mode == MenuListModeEnum::PAGINATED && totalPages > 1) {
     std::cout << CYAN << "|" << RESET
       << " 🧭 Navegação:" << std::setw(5) << "";
-    int space = 83;
+    int space = 84;
     if(canGoToPrevPage()) {
       std::cout << "b. Página anterior" << std::setw(3) << "";
     } else {
@@ -174,22 +174,22 @@ void Menu::printOptions() {
     std::cout << std::setw(space) << "";
     std::cout << CYAN << "|" << RESET << std::endl;
 
-    std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
+    std::cout << CYAN << "|" << RESET << std::string(141, ' ') << CYAN << "|" << RESET << std::endl;
   }
 
   std::cout << CYAN << "|" << RESET
     << " 🚪 Sistema:" << std::setw(7) << ""
     << GREEN << "s. Salvar" << RESET << std::setw(12) << ""
-    << RED << "0. Sair" << RESET << std::setw(93) << ""
+    << RED << "0. Sair" << RESET << std::setw(94) << ""
     << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << BOLD << "+" << std::string(140, '-') << "+" << RESET << std::endl;
+  std::cout << CYAN << BOLD << "+" << std::string(141, '-') << "+" << RESET << std::endl;
   std::cout << CYAN << BOLD << "-> " << RESET;
 }
 
 void Menu::printHeaderDirectionOrderBy() {
   std::cout << CYAN << BOLD << "+";
-  printDivider('-', true, CYAN, 65, false);
+  printDivider('-', true, CYAN, 66, false);
   std::cout << CYAN << BOLD << " Direção ";
   printDivider('-', true, CYAN, 66, false);
   std::cout << CYAN << BOLD << "+" << RESET << std::endl;
@@ -200,15 +200,15 @@ void Menu::printOptionsDirectionOrderBy(HrMenuFieldEnum field) {
 
   std::cout << CYAN << "|" << RESET << (field == HrMenuFieldEnum::IS_REFERRAL ? " 1. Não Indicado" : " 1. Crescente") << std::setw(5) << ""
     << (field == HrMenuFieldEnum::IS_REFERRAL ? "2. Indicado" : "2. Decrescente") << YELLOW << std::setw(5) << ""
-    << "0. Voltar" << std::setw(99) << CYAN << "|" << RESET << std::endl;
+    << "0. Voltar" << std::setw(100) << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << BOLD << "+" << std::string(140, '-') << "+" << RESET << std::endl;
+  std::cout << CYAN << BOLD << "+" << std::string(141, '-') << "+" << RESET << std::endl;
   std::cout << CYAN << BOLD << "-> " << RESET;
 }
 
 void Menu::printPagination() {
   if (mode == MenuListModeEnum::PAGINATED) {
-    std::cout << CYAN << std::setw(62) << "" << "< Página " << currentPage << " de " << totalPages << " >" << RESET << std::endl;
+    std::cout << CYAN << std::setw(63) << "" << "< Página " << currentPage << " de " << totalPages << " >" << RESET << std::endl;
   }
 }
 
@@ -367,6 +367,8 @@ void Menu::removeCandidate() {
     return c.getCpf();
   });
 
+  std::cout << std::endl;
+
   if(candidate != nullptr) {
     candidates.remove(candidate);
     std::cout << GREEN << "Candidato excluido com sucesso!"  << RESET << std::endl;
@@ -524,18 +526,18 @@ void Menu::printOptionsOrderBy() {
     << "3. CPF" << std::setw(5) << ""
     << "4. Setor" << std::setw(5) << ""
     << "5. Cargo" << std::setw(5) << ""
-    << "6. Tipo de Contrato" << std::setw(54) << CYAN << "|" << RESET << std::endl;
+    << "6. Tipo de Contrato" << std::setw(55) << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
+  std::cout << CYAN << "|" << RESET << std::string(141, ' ') << CYAN << "|" << RESET << std::endl;
 
   std::cout << CYAN << "|" << RESET << " 7. Pretensão Salarial" << std::setw(5) << ""
     << "8. Indicação" << std::setw(5) << ""
     << "9. Anos de Experiência" << std::setw(5) << ""
-    << YELLOW << "0. Voltar" << std::setw(60) << ""
+    << YELLOW << "0. Voltar" << std::setw(61) << ""
     << CYAN << "|" << RESET << std::endl;
 
 
-  std::cout << CYAN << BOLD << "+" << std::string(140, '-') << "+" << RESET << std::endl;
+  std::cout << CYAN << BOLD << "+" << std::string(141, '-') << "+" << RESET << std::endl;
   std::cout << CYAN << BOLD << "-> " << RESET;
 }
 
@@ -599,9 +601,9 @@ void Menu::printOptionsFindBy() {
   std::cout << CYAN << "|" << RESET << " 1. Nome Completo" << std::setw(5) << ""
     << "2. CPF" << YELLOW << std::setw(5) << ""
     << "0. Voltar" << std::setw(5) << ""
-    << std::setw(93) << "" << CYAN << "|" << RESET << std::endl;
+    << std::setw(94) << "" << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << BOLD << "+" << std::string(140, '-') << "+" << RESET << std::endl;
+  std::cout << CYAN << BOLD << "+" << std::string(141, '-') << "+" << RESET << std::endl;
   std::cout << CYAN << BOLD << "-> " << RESET;
 }
 
