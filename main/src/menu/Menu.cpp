@@ -155,10 +155,6 @@ void Menu::printOptions() {
     << (mode == MenuListModeEnum::PAGINATED ? "8. Definir items/página" : "") << std::setw(mode == MenuListModeEnum::PAGINATED ? 23 : 46) << ""
     << CYAN << "|" << RESET << std::endl;
 
-  std::cout << CYAN << "|" << RESET << std::setw(19) << ""
-    << "9. Filtrar por:" << std::setw(111)
-    << CYAN << "|" << RESET << std::endl;
-
   std::cout << CYAN << "|" << RESET << std::string(140, ' ') << CYAN << "|" << RESET << std::endl;
 
   if (mode == MenuListModeEnum::PAGINATED && totalPages > 1) {
