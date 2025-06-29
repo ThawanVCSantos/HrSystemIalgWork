@@ -28,6 +28,14 @@ namespace util {
     }
   }
 
+  void StringUtils::toLowerCase(std::string& str) {
+    int i = 0;
+    while (str[i] != '\0') {
+      str[i] = toLowerCase(str[i]);
+      i++;
+    }
+  }
+
   char StringUtils::toUpperCase(char c) {
     if (c >= 'a' && c <= 'z') {
       return c - 32;
@@ -39,6 +47,14 @@ namespace util {
     int i = 0;
     while (cs[i] != '\0') {
       cs[i] = toUpperCase(cs[i]);
+      i++;
+    }
+  }
+
+  void StringUtils::toUpperCase(std::string& str) {
+    int i = 0;
+    while (str[i] != '\0') {
+      str[i] = toUpperCase(str[i]);
       i++;
     }
   }

@@ -12,9 +12,11 @@ namespace util {
 
     static char toLowerCase(char c);
     static void toLowerCase(char* cs);
+    static void toLowerCase(std::string& str);
 
     static char toUpperCase(char c);
     static void toUpperCase(char* cs);
+    static void toUpperCase(std::string& str);
 
     static std::string truncate(const std::string& str, size_t size);
     static std::string centralize(const std::string&, size_t size);
