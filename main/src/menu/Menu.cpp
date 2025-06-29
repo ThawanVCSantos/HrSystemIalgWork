@@ -654,8 +654,13 @@ void Menu::selectOptionFindBy() {
 
   std::cout << (fieldToFind == HrMenuFieldEnum::FULL_NAME ? "Nome completo: " : "CPF: ") << aux << std::endl;
 
+  StringUtils::toLowerCase(aux);
+
   const Candidate* candidate = candidates.findBy(aux, [&fieldToFind](Candidate c) {
-    return fieldToFind == HrMenuFieldEnum::FULL_NAME ? c.getFullName() : c.getCpf();
+    char buf[1300];
+    ArrayUtils::copyArrayElements(fieldToFind == HrMenuFieldEnum::FULL_NAME ? c.getFullName() : c.getCpf(), buf, 1300);
+    StringUtils::toLowerCase(buf);
+    return std::string(buf);
   });
 
   std::cout << std::endl;
