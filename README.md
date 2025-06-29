@@ -20,8 +20,8 @@ Desenvolvido em C++11 com foco em **modularidade, segurança de memória, tratam
 ## 🧩 Principais Funcionalidades
 
 * ✅ Adicionar e remover candidatos
-* 🔍 Buscar candidatos por **nome** ou **CPF**
-* 🧮 Ordenação ascendente/descendente por qualquer campo
+* 🔍 Buscar candidatos por **nome** ou **CPF** com case-insensitive
+* 🧮 Ordenação ascendente/descendente por qualquer campo (string com case-insensitive)
 * 📁 Exportação e importação de CSV
 * 💾 Persistência binária automática com salvamento explícito
 * 📃 Visualização paginada ou completa
