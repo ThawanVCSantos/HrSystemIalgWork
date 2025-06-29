@@ -42,8 +42,8 @@ void Menu::waitForEnter() {
 void Menu::start() {;
   started = true;
   candidates = repository.readAll();
-  updateCandidatesView();
   while (started) {
+    updateCandidatesView();
     print();
     selectOption();
   }
@@ -244,7 +244,6 @@ void Menu::goToNextPage() {
     return;
   }
   currentPage++;
-  updateCandidatesView();
 }
 
 void Menu::goToPrevPage() {
@@ -252,7 +251,6 @@ void Menu::goToPrevPage() {
     return;
   };
   currentPage--;
-  updateCandidatesView();
 }
 
 bool Menu::canGoToNextPage() {
@@ -356,8 +354,6 @@ void Menu::addCandidate() {
 
   std::cout << GREEN << "\nCandidato adicionado com sucesso!" << RESET << std::endl << std::endl;
   waitForEnter();
-
-  updateCandidatesView();
 }
 
 void Menu::removeCandidate() {
@@ -379,7 +375,6 @@ void Menu::removeCandidate() {
   }
   std::cout << std::endl;
   waitForEnter();
-  updateCandidatesView();
 }
 
 void Menu::toggleListMode() {
@@ -389,7 +384,6 @@ void Menu::toggleListMode() {
   } else {
     mode = MenuListModeEnum::ALL;
   }
-  updateCandidatesView();
 }
 
 void Menu::importCsv() {
@@ -458,8 +452,6 @@ void Menu::importCsv() {
 
   std::cout << GREEN << "\nCandidatos importados com sucesso!\n\n" << RESET;
   waitForEnter();
-
-  updateCandidatesView();
 }
 
 void Menu::exportCsv() {
@@ -517,7 +509,6 @@ void Menu::defineItemsPerPage() {
   }
 
   itemsPerPage = itemsPerPageAux;
-  updateCandidatesView();
 }
 
 void Menu::printOptionsOrderBy() {
@@ -846,7 +837,6 @@ void Menu::selectDirectionOrderBy(HrMenuFieldEnum field) {
 
   this->orderByField = field;
   this->orderByDirection = direction;
-  updateCandidatesView();
 }
 
 void Menu::save() {
