@@ -1,3 +1,6 @@
-# Ignore builds and executables
+# Builds and executables
 *.o
 hr_system
+
+# VsCode configs
+.vscode
