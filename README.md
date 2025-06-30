@@ -92,19 +92,33 @@ make
 Para executar
 
 ```bash
-./rh_system
+./hr_system
 ```
 
 Caso deseje compilar manualmente
 
+Linux/macOS
+
 ```bash
-g++ -std=c++11 \\
-  main/src/main.cpp \\
-  main/src/model/Candidate.cpp \\
-  main/src/Menu.cpp \\
-  libs/util/src/StringUtils.cpp \\
-  libs/util/src/FileManager.cpp \\
-  -o rh_syste
+g++ -std=c++11 \
+  main/src/main.cpp \
+  main/src/model/Candidate.cpp \
+  main/src/Menu.cpp \
+  libs/util/src/StringUtils.cpp \
+  libs/util/src/FileManager.cpp \
+  -o hr_system
+```
+
+Windows
+
+```bash
+g++ -std=c++11 \
+  main\\src\\main.cpp \
+  main\\src\\model\\Candidate.cpp \
+  main\\src\\Menu.cpp \
+  libs\\util\\src\\StringUtils.cpp \
+  libs\\util\\src\\FileManager.cpp \
+  -o hr_system.exe
 ```
 
 ---

@@ -1,27 +1,34 @@
-TARGET = hr_system
-
 CXX = g++
-
 CXXFLAGS = -Wall -Wextra -std=c++11 -g
+RM = rm -f
+PATH_SEPARATOR = /
+TARGET = hr_system
+TARGET_EXT = $(TARGET)
+
+ifeq ($(OS),Windows_NT)
+  RM = del /q
+  PATH_SEPARATOR = \\
+  TARGET_EXT = $(if $(findstring .exe,$(TARGET)), $(TARGET), $(TARGET).exe)
+endif
 
 SRCS = \
-  main/src/main.cpp \
-  main/src/model/Candidate.cpp \
-  main/src/menu/Menu.cpp \
-  libs/util/src/StringUtils.cpp \
-  libs/util/src/FileManager.cpp
+  main$(PATH_SEPARATOR)src$(PATH_SEPARATOR)main.cpp \
+  main$(PATH_SEPARATOR)src$(PATH_SEPARATOR)model$(PATH_SEPARATOR)Candidate.cpp \
+  main$(PATH_SEPARATOR)src$(PATH_SEPARATOR)menu$(PATH_SEPARATOR)Menu.cpp \
+  libs$(PATH_SEPARATOR)util$(PATH_SEPARATOR)src$(PATH_SEPARATOR)StringUtils.cpp \
+  libs$(PATH_SEPARATOR)util$(PATH_SEPARATOR)src$(PATH_SEPARATOR)FileManager.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-all: $(TARGET)
+all: $(TARGET_EXT)
 
-$(TARGET): $(OBJS)
+$(TARGET_EXT): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	$(RM) $(OBJS) $(TARGET_EXT)
 
 .PHONY: all clean
