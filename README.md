@@ -9,6 +9,8 @@ Sistema de terminal para **gestão de candidatos** com foco em Recrutamento e Se
 
 Desenvolvido em C++11 com foco em **modularidade, segurança de memória, tratamento robusto de erros e interface interativa**.
 
+**Suporte consistente a Windows, Linux e macOS**
+
 ---
 
 ## 📸 Interface (modo terminal)

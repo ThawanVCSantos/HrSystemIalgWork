@@ -8,6 +8,8 @@
 
 **Util** é uma biblioteca leve e extensível de utilitários em C++11+, ideal para projetos acadêmicos e sistemas C++ modernos. Fornece uma coleção de classes auxiliares para manipulação de arrays, strings, arquivos e diretórios.
 
+**Suporte consistente a Windows, Linux e macOS**
+
 ---
 
 ## 📚 Componentes Principais
