@@ -91,8 +91,16 @@ make
 
 Para executar
 
+Linux/macOS
+
 ```bash
 ./hr_system
+```
+
+Windows
+
+```batch
+hr_system.exe
 ```
 
 Caso deseje compilar manualmente
@@ -103,22 +111,22 @@ Linux/macOS
 g++ -std=c++11 \
   main/src/main.cpp \
   main/src/model/Candidate.cpp \
-  main/src/Menu.cpp \
+  main/src/menu/Menu.cpp \
   libs/util/src/StringUtils.cpp \
   libs/util/src/FileManager.cpp \
   -o hr_system
 ```
 
-Windows
+Windows Powershell
 
-```bash
-g++ -std=c++11 \
-  main\\src\\main.cpp \
-  main\\src\\model\\Candidate.cpp \
-  main\\src\\Menu.cpp \
-  libs\\util\\src\\StringUtils.cpp \
-  libs\\util\\src\\FileManager.cpp \
-  -o hr_system.exe
+```powershell
+& g++ -std=c++11 main/src/main.cpp main/src/model/Candidate.cpp main/src/menu/Menu.cpp libs/util/src/StringUtils.cpp libs/util/src/FileManager.cpp -o hr_system.exe
+```
+
+Windows CMD
+
+```batch
+g++ -std=c++11 main\src\main.cpp main\src\model\Candidate.cpp main\src\menu\Menu.cpp libs\util\src\StringUtils.cpp libs\util\src\FileManager.cpp -o hr_system.exe
 ```
 
 ---
